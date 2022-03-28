@@ -1,0 +1,56 @@
+definitions:
+  responses.Data:
+    properties:
+      full_name:
+        $ref: '#/definitions/signatures.FullNameInfo'
+      random_joke:
+        $ref: '#/definitions/signatures.RandomJoke'
+    type: object
+  responses.JokeResponse:
+    properties:
+      data:
+        $ref: '#/definitions/responses.Data'
+    type: object
+  signatures.FullNameInfo:
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+    type: object
+  signatures.RandomJoke:
+    properties:
+      type:
+        type: string
+      value:
+        $ref: '#/definitions/signatures.RandomJokeValue'
+    type: object
+  signatures.RandomJokeValue:
+    properties:
+      categories:
+        items:
+          type: string
+        type: array
+      id:
+        type: integer
+      joke:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/joke/:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.JokeResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get Joke
+      tags:
+      - Jokes
+swagger: "2.0"
