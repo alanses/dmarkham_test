@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily"
+    commands:
+      - "go mod tidy"
+    update:
+      ignore:
+        - "^v1\\.0\\.0$" # Ignore updates to major version 1.0.0
+    labels:
+      - "dependencies"
